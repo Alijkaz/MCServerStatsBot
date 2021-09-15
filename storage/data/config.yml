@@ -1,0 +1,14 @@
+# Bot main prefix
+prefix: "."
+# Debug prefix, ignore if you don't know what this is
+debug-prefix: "!"
+
+# Server checker to update players count task cycle ( In seconds )
+cycle: 60
+
+# Bot status text ( use %players% for showing players )
+status-text: "%players% players online"
+
+# Your server address port ( address:port )
+server-address: "hypixel.net:25565"
+
