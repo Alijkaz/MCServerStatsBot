@@ -6,8 +6,8 @@ debug-prefix: "!"
 # Server checker to update players count task cycle ( In seconds )
 cycle: 60
 
-# Bot status text ( use %players% for showing players )
-status-text: "%players% players online"
+# Bot status text ( use %current% for online players and %max% for max players )
+status-text: "%current%/%max% players online"
 
 # Your Minecraft server address
 server-address: "hypixel.net"

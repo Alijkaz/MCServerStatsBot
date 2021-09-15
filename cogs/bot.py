@@ -31,17 +31,12 @@ class Bot(Cog):
         await self.bot.wait_until_ready()
 
         if status != None:
-            current_players = status.players.online
-            max_players = status.players.max
-
-            if status.players.max > 0:
-                players = str(current_players)
-            else:
-                players = str(current_players) + "/" + str(max_players)
+            current_players = str(status.players.online)
+            max_players = str(status.players.max)
             
             await self.bot.change_presence(
                 activity=Activity(
-                    type=ActivityType.watching, name=Config.STATUS_TEXT.replace('%players%', players)
+                    type=ActivityType.watching, name=Config.STATUS_TEXT.replace('%current%', current_players).replace('%max%', max_players)
                     )
                 )
         print('2')
