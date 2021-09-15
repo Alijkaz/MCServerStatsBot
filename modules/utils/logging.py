@@ -44,13 +44,13 @@ def add_discord_logger_handler():
     return add_handler('discord', 'discord.log', logging.WARN, logging.DEBUG, logging.DEBUG)
 
 def add_main_logger_handler():
-    return add_handler('IRMCTracker','latest.log', logging.INFO,logging.INFO, logging.INFO)
+    return add_handler('MCStatsBot','latest.log', logging.INFO,logging.INFO, logging.INFO)
 
 def add_debug_logger_handler():
-    return add_handler('IRMCTracker Debug','debug.log', logging.DEBUG,logging.DEBUG, logging.DEBUG)
+    return add_handler('MCStatsBot Debug','debug.log', logging.DEBUG,logging.DEBUG, logging.DEBUG)
 
 def get_logger():
-    return logging.getLogger('IRMCTracker')
+    return logging.getLogger('MCStatsBot')
     
 def get_debug_logger():
-    return logging.getLogger('IRMCTracker Debug')
+    return logging.getLogger('MCStatsBot Debug')

@@ -3,9 +3,3 @@
 
 Can be directly executed via running 'python main.py test' command
 """
-
-from modules.database import *
-
-create_tables()
-
-

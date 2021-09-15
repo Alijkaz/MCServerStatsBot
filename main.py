@@ -1,10 +1,13 @@
 import sys
 from os import listdir
 
-from discord import Intents
 from discord.ext.commands import Bot
 
 from modules.config import Config, Env
+
+from mcstatus import MinecraftServer
+
+import socket
 
 def run_discord_bot():
     """ Running discord bot
@@ -16,17 +19,16 @@ def run_discord_bot():
     """ 
     
     bot = Bot(command_prefix=Config.PREFIX,
-              intents=Intents().all(), help_command=None)
+     help_command=None)
 
     for filename in listdir('./cogs'):
         if filename.endswith('.py'):
             bot.load_extension(f'cogs.{filename[:-3]}')
-            print(f"\n- Loaded {filename}")
+            print(f"\n- Loaded {filename}\n")
 
     bot.run(Env.TOKEN)
 
     return bot
-
 
 if __name__ == "__main__":
     args = sys.argv[1:]

@@ -1,3 +1,4 @@
+from socket import socket
 from discord import Activity, ActivityType
 from discord.ext import tasks
 from discord.ext.commands import Cog, Bot as _bot
@@ -13,28 +14,36 @@ class Bot(Cog):
 
     def __init__(self, bot):
         self.bot: _bot = bot
+        self.fetch_server_task.start()
 
     @Cog.listener()
     async def on_ready(self):
         get_logger().info(f"Booted and running on user: {self.bot.user}")
 
-        self.fetch_server_task.start()
-
     @tasks.loop(seconds = int(Config.CYCLE))
     async def fetch_server_task(self):
-        server = MinecraftServer.lookup(Config)
-        status = server.status()
+        try:
+            server = MinecraftServer.lookup(Config.SERVER_ADDRESS)
+            status = server.status()
+        except socket.error:
+            status = None
 
-        if status.players.max > 0:
-            players = status.players.online
-        else:
-            players = status.players.online + "/" + status.players.max
-        
-        await self.bot.change_presence(
-            activity=Activity(
-                type=ActivityType.watching, name=players
+        await self.bot.wait_until_ready()
+
+        if status != None:
+            current_players = status.players.online
+            max_players = status.players.max
+
+            if status.players.max > 0:
+                players = str(current_players)
+            else:
+                players = str(current_players) + "/" + str(max_players)
+            
+            await self.bot.change_presence(
+                activity=Activity(
+                    type=ActivityType.watching, name=Config.STATUS_TEXT.replace('%players%', players)
+                    )
                 )
-            )
-
+        print('2')
 def setup(bot: _bot):
     bot.add_cog(Bot(bot))

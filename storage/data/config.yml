@@ -9,6 +9,6 @@ cycle: 60
 # Bot status text ( use %players% for showing players )
 status-text: "%players% players online"
 
-# Your server address port ( address:port )
-server-address: "hypixel.net:25565"
+# Your Minecraft server address
+server-address: "hypixel.net"
 
