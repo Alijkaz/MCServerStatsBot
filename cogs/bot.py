@@ -39,6 +39,6 @@ class Bot(Cog):
                     type=ActivityType.watching, name=Config.STATUS_TEXT.replace('%current%', current_players).replace('%max%', max_players)
                     )
                 )
-        print('2')
+
 def setup(bot: _bot):
     bot.add_cog(Bot(bot))
