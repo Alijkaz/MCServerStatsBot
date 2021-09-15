@@ -20,7 +20,7 @@ class Bot(Cog):
 
         self.fetch_server_task.start()
 
-    @tasks.loop(seconds = Config)
+    @tasks.loop(seconds = int(Config.CYCLE))
     async def fetch_server_task(self):
         server = MinecraftServer.lookup(Config)
         status = server.status()
