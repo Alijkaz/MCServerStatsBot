@@ -4,12 +4,7 @@ from os import listdir
 from discord import Intents
 from discord.ext.commands import Bot
 
-from modules.config import Env
-from modules.utils import get_logger
-from modules.database import create_tables, database
-
-from threading import Thread
-
+from modules.config import Config, Env
 
 def run_discord_bot():
     """ Running discord bot
@@ -20,7 +15,7 @@ def run_discord_bot():
         - Will load every single cog in ~/cogs/ directory and run the bot    
     """ 
     
-    bot = Bot(command_prefix=Env.PREFIX,
+    bot = Bot(command_prefix=Config.PREFIX,
               intents=Intents().all(), help_command=None)
 
     for filename in listdir('./cogs'):
@@ -35,28 +30,14 @@ def run_discord_bot():
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    db = database.connect()
 
     if len(args) == 0:
         sys.exit(
-            "You have not entered any args.\nAvailable args: [run , test, example]")
+            "You have not entered any args.\nAvailable args: [run , test]")
 
     if args[0] == 'run':
-        # Creating the database tables (and the actual database file if doesnt exist)
-        create_tables()
-
         bot = run_discord_bot()
 
-        bot.db = db
 
     elif args[0] == 'test':
         from tests.test_basic import *
-
-    elif ':' in args[0]:
-        cmd, child = args[0].split(':')
-
-        if cmd == 'example':
-            if child == 'sayhi':
-                print('hi')
-            else:
-                print('Available childs: [sayhi]')
