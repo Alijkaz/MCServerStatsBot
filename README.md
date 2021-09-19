@@ -30,4 +30,4 @@ Pull requests are welcomed. For major changes, please open an issue first to dis
 
 
 ## License
-[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
+[MIT](https://choosealicense.com/licenses/mit/)
