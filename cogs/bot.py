@@ -25,7 +25,7 @@ class Bot(Cog):
         try:
             server = MinecraftServer.lookup(Config.SERVER_ADDRESS)
             status = server.status()
-        except socket.error:
+        except:
             status = None
 
         await self.bot.wait_until_ready()
